@@ -1,3 +1,13 @@
+""" The GameState class should be inherited when you want to make different
+parts of the game (main menu, pause menu, actual gameplay, etc). The class
+itself contains a number of functions that will be called each loop
+    HandleEvents()
+    Update()
+    DrawScreen()
+    UpdateDisplay()
+    HandleFPS()
+but also contains functions that make tasks easier, like getting the mouse
+position"""
 import pygame
 
 
