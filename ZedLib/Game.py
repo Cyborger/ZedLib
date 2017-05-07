@@ -1,4 +1,8 @@
+""" The core of the game. Handles states, the screen, the game loop,
+and is also passed to certain objects that need to have access to different
+parts of the game"""
 import pygame
+
 
 class Game:
     def __init__(self, screen_width, screen_height):

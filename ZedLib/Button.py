@@ -1,3 +1,8 @@
+""" Used to make hoverable buttons that complete different tasks when clicked.
+To make a button that does something when clicked, create a new button class
+that inherits the super class but overrides the Clicked() function"""
+
+
 class Button:
     def __init__(self, spritesheet):
         self.non_hovered_image = spritesheet.GetImage(0, 0)

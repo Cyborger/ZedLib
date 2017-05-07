@@ -1,10 +1,12 @@
 import pygame
 
+
 class GameState:
     def __init__(self, game):
         self.game = game
         self.buttons = []
         self.fps = 60
+
     # Handle different types of events
     def HandleEvents(self):
         events = pygame.event.get()
@@ -21,9 +23,10 @@ class GameState:
 
     # Scale screen then update the actual display
     def UpdateDisplay(self):
+        new_width = self.game.display_info.current_w
+        new_height = self.game.display_info.current_h
         scaled_screen = pygame.transform.scale(self.game.screen,
-                            (self.game.display_info.current_w,
-                             self.game.display_info.current_h))
+                                               (new_width, new_height))
         self.game.rendering_screen.blit(scaled_screen, (0, 0))
         pygame.display.flip()
 
@@ -45,10 +48,12 @@ class GameState:
         middle_click = 2
         right_click = 3
         for event in events:
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == left_click:
+            if event.type == pygame.MOUSEBUTTONDOWN
+            and event.button == left_click:
                 for button in self.buttons:
                     button.CheckPress()
-            elif event.type == pygame.MOUSEBUTTONUP and event.button == left_click:
+            elif event.type == pygame.MOUSEBUTTONUP
+            and event.button == left_click:
                 for button in self.buttons:
                     button.CheckRelease()
 
