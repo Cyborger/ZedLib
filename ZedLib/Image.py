@@ -19,12 +19,6 @@ class Spritesheet:
 
     # Get a subsurface at a specified tile
     def GetImage(self, x, y):
-        x -= 1
-        if x < 0:
-            print("speicified x value for getting image is too low")
-        y -= 1
-        if y < 0:
-            print("specified y value for getting image is too low")
         image_width = x * self.tile_width
         image_height = y * self.tile_height
         new_image = self.image.subsurface((image_width, image_height,
