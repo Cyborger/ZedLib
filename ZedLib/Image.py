@@ -16,21 +16,32 @@ class Spritesheet:
         self.tiles_high = tiles_high
         self.tile_width = self.image.get_width() / self.tiles_wide
         self.tile_height = self.image.get_height() / self.tiles_high
-        self.x_offset = x_offset
-        self.y_offset = y_offset
-        self.frames = []
-        for y in range(self.tiles_wide):
-            for x in range(self.tiles_high):
-                next_frame = self.GetImage(x, y)
-                self.frames.append(next_frame)
 
     # Get a subsurface at a specified tile
     def GetImage(self, x, y):
+        x -= 1
+        if x < 0:
+            print("speicified x value for getting image is too low")
+        y -= 1
+        if y < 0:
+            print("specified y value for getting image is too low")
         image_width = x * self.tile_width
         image_height = y * self.tile_height
         new_image = self.image.subsurface((image_width, image_height,
                                            self.tile_width, self.tile_height))
         return new_image
+    
+    def GetHorizontalStrip(self, y):
+        strip = []
+        for x in range(self.tiles_wide):
+            image = self.GetImage(x, y)
+            strip.append(image)
+            
+    def GetVerticalStrip(self, x):
+        strip = []
+        for y in range(self.tiles_high):
+            image = self.GetImage(x, y)
+            strip.append(image)
 
 
 # Surfaces are for creating images like splash screens, not to replace
