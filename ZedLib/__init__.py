@@ -1,6 +1,5 @@
 """To-do:
 # Animation
-# Change spritesheets to horizontal and vertical strips
 # Physics object
 # Timer
 # Collision object
