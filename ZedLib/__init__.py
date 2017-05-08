@@ -1,7 +1,9 @@
 """To-do:
-# Animations
+# Animation
 # Change spritesheets to horizontal and vertical strips
-# Physics objects
+# Physics object
+# Timer
+# Collision object
 """
 from .Game import *
 from .GameState import *
