@@ -1,10 +1,11 @@
 """To-do:
-# Animation
 # Physics object
-# Timer
 # Collision object
 """
 from .Game import *
 from .GameState import *
 from .Button import *
-from .ImageHandling import *
+from .ImageLoading import *
+from .Spritesheet import *
+from .Surface import *
+from .Timer import *

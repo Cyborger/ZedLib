@@ -8,31 +8,28 @@ class Animation:
     self.current_frame_n = 0
     self.frame_image = None
     self.looping = looping
-    
+
   def IncrementFrame(self):
     self.current_frame_n += 1
     if self.current_frame_n > len(self.frames):
       self.ReachedEnd()
     self.frame_image = self.frames[self.current_frame_n]
     self.sprite.image = self.frame_image
-    
+
   def ReachedEnd(self):
     if self.looping:
       self.current_frame_n = 0
     else:
       self.current_frame_n = len(self.frames)
 
-    
+
 class DeltaAnimation():
-  def __init__(self, sprite, frames, looping=True, ms_delay):
+  def __init__(self, sprite, frames, ms_delay, looping=True):
     super().__init__(sprite, frames, looping)
     self.timer = Timer.LappingTimer(ms_delay)
-    
+
   def Update(self, delta):
     self.timer.Update(delta)
-    for i range(self.timer.num_of_laps):
+    for i range(self.timer.laps_complete):
       self.IncrementFrame()
-      self.timer.num_of_laps -= 1
-    
-    
-    
+      self.timer.laps_complete -= 1

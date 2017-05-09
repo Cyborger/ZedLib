@@ -6,7 +6,7 @@ import pygame
 
 class Game:
     def __init__(self, screen_width, screen_height):
-        pygame.__init__()
+        pygame.init()
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.screen = pygame.Surface((self.screen_width, self.screen_height))

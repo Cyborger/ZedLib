@@ -58,12 +58,12 @@ class GameState:
         middle_click = 2
         right_click = 3
         for event in events:
-            if event.type == pygame.MOUSEBUTTONDOWN
-            and event.button == left_click:
+            if (event.type == pygame.MOUSEBUTTONDOWN
+            and event.button == left_click):
                 for button in self.buttons:
                     button.CheckPress()
-            elif event.type == pygame.MOUSEBUTTONUP
-            and event.button == left_click:
+            elif (event.type == pygame.MOUSEBUTTONUP
+            and event.button == left_click):
                 for button in self.buttons:
                     button.CheckRelease()
 

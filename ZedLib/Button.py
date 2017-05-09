@@ -4,9 +4,9 @@ that inherits the super class but overrides the Clicked() function"""
 
 
 class Button:
-    def __init__(self, spritesheet):
-        self.non_hovered_image = spritesheet.GetImage(0, 0)
-        self.hovered_image = spritesheet.GetImage(0, 1)
+    def __init__(self, strip):
+        self.non_hovered_image = strip[0]
+        self.hovered_image = strip[1]
         self.image = non_hovered_image
         self.rect = self.image.get_rect()
         self.hovered = False
