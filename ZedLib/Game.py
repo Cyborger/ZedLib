@@ -5,15 +5,17 @@ import pygame
 
 
 class Game:
-    def __init__(self, screen_width, screen_height):
+    def __init__(self, screen_width, screen_height, fullscreen=False):
         pygame.init()
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.screen = pygame.Surface((self.screen_width, self.screen_height))
-        self.display_info = pygame.display.Info()
         self.rendering_screen = pygame.display.set_mode(
-                                               (self.display_info.current_w,
-                                                self.display_info.current_h))
+                                               (self.screen_width, self.screen_height),
+                                                pygame.RESIZABLE)
+        if fullscreen:
+            self.pygame.display.toggle_fullscreen()
+        self.display_info = pygame.display.Info()
         self.current_state = None
         self.running = True
 
