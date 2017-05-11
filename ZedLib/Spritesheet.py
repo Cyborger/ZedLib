@@ -1,8 +1,5 @@
-"""
-For loading images and putting them into a certain
-format; a spritesheet for animation or a scaled image with a rect.
-"""
 import pygame
+
 
 # Spritesheets are made to be passed to animations.
 # They hold the image itself, information such as tile width and height, and

@@ -10,13 +10,16 @@ class Game:
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.screen = pygame.Surface((self.screen_width, self.screen_height))
-        self.rendering_screen = pygame.display.set_mode(
-                                               (self.screen_width, self.screen_height),
-                                                pygame.RESIZABLE)
+        self.render_screen_width = self.screen_width
+        self.render_screen_height = self.screen_height
+        self.rendering_screen = pygame.display.\
+            set_mode((self.render_screen_width, self.screen_height),
+                     pygame.RESIZABLE)
         if fullscreen:
             self.pygame.display.toggle_fullscreen()
         self.display_info = pygame.display.Info()
         self.current_state = None
+        self.clock = pygame.time.Clock()
         self.running = True
 
     def ChangeState(self, new_state):

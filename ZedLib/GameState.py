@@ -33,8 +33,8 @@ class GameState:
 
     # Scale screen then update the actual display
     def UpdateDisplay(self):
-        new_width = self.game.display_info.current_w
-        new_height = self.game.display_info.current_h
+        new_width = self.game.render_screen_width
+        new_height = self.game.render_screen_height
         scaled_screen = pygame.transform.scale(self.game.screen,
                                                (new_width, new_height))
         self.game.rendering_screen.blit(scaled_screen, (0, 0))
@@ -51,6 +51,9 @@ class GameState:
                 self.game.running = False
             elif event.type == pygame.KEYDOWN:
                 self.game.running = False
+            elif event.type == pygame.VIDEORESIZE:
+                self.game.render_screen_width = event.w
+                self.game.render_screen_height = event.h
 
     # Deal with mouse button presses
     def HandleMouseEvents(self, events):
@@ -59,11 +62,11 @@ class GameState:
         right_click = 3
         for event in events:
             if (event.type == pygame.MOUSEBUTTONDOWN
-            and event.button == left_click):
+                    and event.button == left_click):
                 for button in self.buttons:
                     button.CheckPress()
             elif (event.type == pygame.MOUSEBUTTONUP
-            and event.button == left_click):
+                    and event.button == left_click):
                 for button in self.buttons:
                     button.CheckRelease()
 

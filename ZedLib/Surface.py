@@ -1,6 +1,6 @@
 # Surfaces are for creating images like splash screens, not to replace
 # loading images from pygame
-import ImageLoading
+
 
 class Surface:
     def __init__(self, file_path, x=0, y=0, scale=1):
