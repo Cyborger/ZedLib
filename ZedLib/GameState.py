@@ -33,11 +33,11 @@ class GameState:
 
     # Scale screen then update the actual display
     def UpdateDisplay(self):
-        new_width = self.game.render_screen_width
-        new_height = self.game.render_screen_height
+        new_width = self.game.render_screen.width
+        new_height = self.game.render_screen.height
         scaled_screen = pygame.transform.scale(self.game.screen,
                                                (new_width, new_height))
-        self.game.rendering_screen.blit(scaled_screen, (0, 0))
+        self.game.Draw(scaled_screen, (0, 0))
         pygame.display.flip()
 
     def HandleFPS(self):
@@ -52,8 +52,7 @@ class GameState:
             elif event.type == pygame.KEYDOWN:
                 self.game.running = False
             elif event.type == pygame.VIDEORESIZE:
-                self.game.render_screen_width = event.w
-                self.game.render_screen_height = event.h
+                self.game.render_screen.Resize(event.w, event.h)
 
     # Deal with mouse button presses
     def HandleMouseEvents(self, events):
@@ -73,8 +72,8 @@ class GameState:
     # Get accurate mouse pos
     def GetMousePosition(self):
         unscaled_mouse_pos = pygame.mouse.get_pos()
-        x_modifier = self.game.screen_width / self.game.display_info.current_w
-        y_modifier = self.game.screen_height / self.game.display_info.current_h
+        x_modifier = self.game.screen_width / self.game.render_screen.width
+        y_modifier = self.game.screen_height / self.game.render_screen.height
         mouse_pos = (unscaled_mouse_pos[0] * x_modifier,
                      unscaled_mouse_pos[1] * y_modifier)
         return mouse_pos
