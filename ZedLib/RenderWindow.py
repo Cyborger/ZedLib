@@ -1,5 +1,6 @@
 import pygame
 
+
 class RenderWindow:
     def __init__(self, width, height, fullscreen=False):
         self.width = width

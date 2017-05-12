@@ -10,6 +10,7 @@ class Timer:
             self.time_passed = self.delay
             self.complete = True
 
+
 class LappingTimer:
     def __init__(self, lap_time):
         self.lap_time = lap_time

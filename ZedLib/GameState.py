@@ -24,8 +24,7 @@ class GameState:
 
     # Update sprites
     def Update(self):
-        self.UpdateSprites()
-        self.UpdateButtons()
+        pass
 
     # Draw sprites and images
     def DrawScreen(self):
@@ -77,9 +76,6 @@ class GameState:
         mouse_pos = (unscaled_mouse_pos[0] * x_modifier,
                      unscaled_mouse_pos[1] * y_modifier)
         return mouse_pos
-
-    def UpdateSprites(self):
-        pass
 
     def UpdateButtons(self):
         mouse_pos = self.GetMousePosition()

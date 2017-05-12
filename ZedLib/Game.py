@@ -4,6 +4,7 @@ parts of the game"""
 import pygame
 from ZedLib import RenderWindow
 
+
 class Game:
     def __init__(self, screen_width, screen_height, fullscreen=False):
         pygame.init()
