@@ -10,6 +10,10 @@ class Timer:
             self.time_passed = self.delay
             self.complete = True
 
+    def Reset(self):
+        self.time_passed = 0
+        self.complete = False
+
 
 class LappingTimer:
     def __init__(self, lap_time):
