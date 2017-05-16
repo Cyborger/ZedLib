@@ -2,26 +2,29 @@ import ZedLib
 
 
 class Animation:
-    def __init__(self, sprite, frames, looping=True):
-        self.sprite = sprite
+    def __init__(self, frames, looping=True):
         self.frames = frames
         self.current_frame_n = 0
         self.frame_image = None
         self.looping = looping
+        self.needs_update = True
+
+    def GetFrameImage(self):
+        if self.needs_update:
+            self.needs_update = False
+            return self.frames[self.current_frame_n]
 
     def IncrementFrame(self):
         self.current_frame_n += 1
         if self.current_frame_n > len(self.frames) - 1:
             self.ReachedEnd()
-        self.frame_image = self.frames[self.current_frame_n]
-        self.sprite.image = self.frame_image
+        self.needs_update = True
 
     def DecreaseFrame(self):
         self.current_frame_n -=1
         if self.current_frame_n < 0:
             self.current_frame_n = 0
-        self.frame_image = self.frames[self.current_frame_n]
-        self.sprite.image = self.frame_image
+        self.needs_update = True
 
     def ReachedEnd(self):
         if self.looping:
@@ -31,8 +34,8 @@ class Animation:
 
 
 class DeltaAnimation(Animation):
-    def __init__(self, sprite, frames, ms_delay, looping=True):
-        super().__init__(sprite, frames, looping)
+    def __init__(self,  frames, ms_delay, looping=True):
+        super().__init__(frames, looping)
         self.timer = ZedLib.LappingTimer(ms_delay)
 
     def Update(self, delta):
