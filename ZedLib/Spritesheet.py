@@ -1,5 +1,5 @@
 import pygame
-
+import ZedLib
 
 # Spritesheets are made to be passed to animations.
 # They hold the image itself, information such as tile width and height, and
@@ -7,7 +7,7 @@ import pygame
 class Spritesheet:
     def __init__(self, file_path, tiles_wide, tiles_high,
                  scale=1, x_offset=0, y_offset=0):
-        self.image = ImageLoading.LoadImage(file_path, scale)
+        self.image = ZedLib.LoadImage(file_path, scale)
         self.tiles_wide = tiles_wide
         self.tiles_high = tiles_high
         self.tile_width = self.image.get_width() / self.tiles_wide
@@ -26,9 +26,11 @@ class Spritesheet:
         for x in range(self.tiles_wide):
             image = self.GetImage(x, y)
             strip.append(image)
+        return strip
 
     def GetVerticalStrip(self, x):
         strip = []
         for y in range(self.tiles_high):
             image = self.GetImage(x, y)
             strip.append(image)
+        return strip

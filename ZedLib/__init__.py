@@ -9,3 +9,4 @@ from .ImageLoading import *
 from .Spritesheet import *
 from .Surface import *
 from .Timer import *
+from .Animation import *
