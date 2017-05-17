@@ -1,3 +1,6 @@
+""" Create animations that change can be used to switch between images of a
+list passed. Can be looping or not, but can also require to be changed
+manually or to change based on time passed (DeltaAnimation)."""
 import ZedLib
 
 

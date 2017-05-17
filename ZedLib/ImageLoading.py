@@ -1,3 +1,5 @@
+""" Alternative to pygame.image.load() that has scaling and automatically
+convert alpha"""
 import pygame
 
 

@@ -1,10 +1,9 @@
+"""Spritesheets are made to be passed to animations.
+They hold the image itself, information such as tile width and height, and
+allows for the retrieving of horizontal or vertical strips"""
 import pygame
 import ZedLib
 
-
-# Spritesheets are made to be passed to animations.
-# They hold the image itself, information such as tile width and height, and
-# also hold an array of frames
 class Spritesheet:
     def __init__(self, file_path, tiles_wide, tiles_high,
                  scale=1, x_offset=0, y_offset=0):

@@ -1,3 +1,5 @@
+""" A basic collision object that stops sprites from walking through it"""
+
 class CollisionObject:
     def __init__(self, image, x=0, y=0):
         self.image = image

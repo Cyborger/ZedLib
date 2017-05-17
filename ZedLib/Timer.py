@@ -1,3 +1,4 @@
+"""Timers for keeping track of time, either lapping or not"""
 class Timer:
     def __init__(self, delay):
         self.delay = delay
