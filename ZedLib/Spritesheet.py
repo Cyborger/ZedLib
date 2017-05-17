@@ -1,6 +1,7 @@
 import pygame
 import ZedLib
 
+
 # Spritesheets are made to be passed to animations.
 # They hold the image itself, information such as tile width and height, and
 # also hold an array of frames

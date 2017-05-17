@@ -5,26 +5,26 @@ class Animation:
     def __init__(self, frames, looping=True):
         self.frames = frames
         self.current_frame_n = 0
-        self.frame_image = None
         self.looping = looping
-        self.needs_update = True
 
     def GetFrameImage(self):
-        if self.needs_update:
-            self.needs_update = False
-            return self.frames[self.current_frame_n]
+        return self.frames[self.current_frame_n]
 
     def IncrementFrame(self):
         self.current_frame_n += 1
         if self.current_frame_n > len(self.frames) - 1:
             self.ReachedEnd()
-        self.needs_update = True
 
     def DecreaseFrame(self):
-        self.current_frame_n -=1
+        self.current_frame_n -= 1
         if self.current_frame_n < 0:
+            self.ReachedStart()
+
+    def ReachedStart(self):
+        if self.looping:
+            self.current_frame_n = len(self.frames) - 1
+        else:
             self.current_frame_n = 0
-        self.needs_update = True
 
     def ReachedEnd(self):
         if self.looping:
