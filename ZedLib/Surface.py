@@ -2,6 +2,7 @@
 # loading images from pygame
 import ZedLib
 
+
 class Surface:
     def __init__(self, file_path, x=0, y=0, scale=1):
         self.image = ZedLib.LoadImage(file_path, scale)

@@ -1,0 +1,2 @@
+class GUIBar:
+    pass
