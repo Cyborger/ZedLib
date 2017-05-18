@@ -1,4 +1,6 @@
 """Generic gamesprite for anything involving movement"""
+
+
 class GameSprite:
     def __init__(self, image, x=0, y=0):
         self.image = image

@@ -1,6 +1,7 @@
 """ A GameSprite that has gravity"""
 import ZedLib
 
+
 class PhysicsSprite(ZedLib.GameSprite):
     def __init__(self, image, x=0, y=0):
         super().__init__(image, x, y)

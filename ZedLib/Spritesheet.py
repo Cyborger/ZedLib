@@ -4,6 +4,7 @@ allows for the retrieving of horizontal or vertical strips"""
 import pygame
 import ZedLib
 
+
 class Spritesheet:
     def __init__(self, file_path, tiles_wide, tiles_high,
                  scale=1, x_offset=0, y_offset=0):
