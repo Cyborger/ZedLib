@@ -1,5 +1,4 @@
-# Surfaces are for creating images like splash screens, not to replace
-# loading images from pygame
+"""Surfaces for creating images like splash screens"""
 import ZedLib
 
 
