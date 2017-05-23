@@ -55,4 +55,4 @@ while running:
     for projectile in projectiles:
         screen.blit(projectile.image, projectile.rect)
     pygame.display.flip()
-    clock.tick()
+    clock.tick(120)
