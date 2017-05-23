@@ -11,6 +11,10 @@ class Position:
         self.rect.x = int(self.x)
         self.rect.y = int(self.y)
 
+    def SetPosition(self, x, y):
+        self.pos.x = x
+        self.pos.y = y
+
     def Move(self, x, y):
         self.MoveX(x)
         self.MoveY(y)
@@ -22,5 +26,10 @@ class Position:
         self.y += amount
 
     # Calculate the hyp of a triangle for normalized diagonal movement
-    def MoveDiagonal(self, x, y, hyp):
-        pass
+    def MoveOnAngle(self, angle, distance):
+        cos_angle = math.cos(math.radians(angle))
+        x = cos_angle * distance
+        sin_angle = math.sin(math.radians(angle))
+        y = sin_angle * distance
+        self.x += x
+        self.y += y
