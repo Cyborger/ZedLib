@@ -10,3 +10,7 @@ from .Spritesheet import *
 from .Surface import *
 from .Timer import *
 from .Animation import *
+from .Position import *
+from .GameSprite import *
+from .PhysicsSprite import *
+from .Projectile import *

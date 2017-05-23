@@ -7,13 +7,19 @@ class Position:
         self.x = x
         self.y = y
 
-    def GetRectPosition(self, rect):
-        self.rect.x = int(self.x)
-        self.rect.y = int(self.y)
+    def SetRectPosition(self, rect):
+        rect.x = int(self.x)
+        rect.y = int(self.y)
 
     def SetPosition(self, x, y):
-        self.pos.x = x
-        self.pos.y = y
+        self.SetX(x)
+        self.SetY(y)
+
+    def SetX(self, x):
+        self.x = x
+
+    def SetY(self, y):
+        self.y = y
 
     def Move(self, x, y):
         self.MoveX(x)
@@ -24,12 +30,3 @@ class Position:
 
     def MoveY(self, amount):
         self.y += amount
-
-    # Calculate the hyp of a triangle for normalized diagonal movement
-    def MoveOnAngle(self, angle, distance):
-        cos_angle = math.cos(math.radians(angle))
-        x = cos_angle * distance
-        sin_angle = math.sin(math.radians(angle))
-        y = sin_angle * distance
-        self.x += x
-        self.y += y
