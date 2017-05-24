@@ -9,8 +9,8 @@ def GetRandomColor():
     return (random_red, random_green, random_blue)
 
 pygame.init()
-screen_width = 1000
-screen_height = 1000
+screen_width = 400
+screen_height = 400
 spawn_x = screen_width / 2
 spawn_y = screen_height / 2
 screen = pygame.display.set_mode((screen_width, screen_height))
