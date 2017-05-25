@@ -8,7 +8,7 @@ click is released, if it is still hovered it will do whatever Activate() is"""
 
 
 class Button:
-    def __init__(self, strip):
+    def __init__(self, strip, function=None):
         self.non_hovered_image = strip[0]
         self.hovered_image = strip[1]
         self.clicked_image = strip[2]
@@ -16,6 +16,7 @@ class Button:
         self.rect = self.image.get_rect()
         self.hovered = False
         self.pressed = False
+        self.Activate = function
 
     def SetPosition(self, x, y):
         self.rect.x = x

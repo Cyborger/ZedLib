@@ -49,7 +49,8 @@ class GameState:
             if event.type == pygame.QUIT:
                 self.game.running = False
             elif event.type == pygame.KEYDOWN:
-                self.game.running = False
+                if event.key == pygame.K_F1:
+                    self.game.running = False
             elif event.type == pygame.VIDEORESIZE:
                 self.game.render_screen.Resize(event.w, event.h)
 
