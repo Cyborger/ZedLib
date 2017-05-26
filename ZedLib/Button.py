@@ -7,20 +7,17 @@ if the button is hovered, if it then it will be held down. Once the mouse
 click is released, if it is still hovered it will do whatever Activate() is"""
 
 
-class Button:
-    def __init__(self, strip, function=None):
+class Button(ZedLib.Surface):
+    def __init__(self, strip, function=None, x=0, y=0):
         self.non_hovered_image = strip[0]
         self.hovered_image = strip[1]
         self.clicked_image = strip[2]
-        self.image = self.non_hovered_image
+        super().__init__(self.non_hovered_image, x, y)
         self.rect = self.image.get_rect()
         self.hovered = False
         self.pressed = False
-        self.Activate = function
-
-    def SetPosition(self, x, y):
-        self.rect.x = x
-        self.rect.y = y
+        if function is not None:
+            self.Activate = function
 
     def Update(self, mouse_position):
         if self.rect.collidepoint(mouse_position):
@@ -44,10 +41,11 @@ class Button:
             self.image = self.clicked_image.copy()
 
     def CheckRelease(self):
-        if self.pressed:
+        if self.pressed and self.hovered:
             self.pressed = False
             self.image = self.hovered_image.copy()
             self.Activate()
 
     def Activate(self):
-        pass
+        print("Button is doing whatever it should be, " +
+              "but there is nothing to do")

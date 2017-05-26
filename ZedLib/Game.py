@@ -10,6 +10,7 @@ class Game:
         pygame.init()
         self.screen_width = screen_width
         self.screen_height = screen_height
+        self.screen_middle = [self.screen_width / 2, self.screen_height / 2]
         self.screen = pygame.Surface((self.screen_width, self.screen_height))
         self.render_screen = RenderWindow.RenderWindow(self.screen_width,
                                                        self.screen_height,
@@ -18,9 +19,6 @@ class Game:
         self.clock = pygame.time.Clock()
         self.running = True
 
-    def Draw(self, image, position):
-        self.render_screen.screen.blit(image, position)
-
     def ChangeState(self, new_state):
         self.current_state = new_state
 
@@ -28,6 +26,7 @@ class Game:
         while self.running:
             self.current_state.HandleEvents()
             self.current_state.Update()
+            self.current_state.ClearScreen()
             self.current_state.DrawScreen()
             self.current_state.UpdateDisplay()
             self.current_state.HandleFPS()

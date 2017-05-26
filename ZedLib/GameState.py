@@ -15,6 +15,7 @@ class GameState:
     def __init__(self, game):
         self.game = game
         self.buttons = []
+        self.splashes = []
         self.fps = 60
 
     # Handle different types of events
@@ -26,6 +27,10 @@ class GameState:
     def Update(self):
         pass
 
+    # Clear screen for next draw
+    def ClearScreen(self):
+        self.game.screen.fill((0, 0, 0))
+
     # Draw sprites and images
     def DrawScreen(self):
         pass
@@ -36,7 +41,7 @@ class GameState:
         new_height = self.game.render_screen.height
         scaled_screen = pygame.transform.scale(self.game.screen,
                                                (new_width, new_height))
-        self.game.Draw(scaled_screen, (0, 0))
+        self.game.render_screen.screen.blit(scaled_screen, (0, 0))
         pygame.display.flip()
 
     def HandleFPS(self):
@@ -82,6 +87,22 @@ class GameState:
         mouse_pos = self.GetMousePosition()
         for button in self.buttons:
             button.Update(mouse_pos)
+
+    def AddSplashes(self, *splashes):
+        for splash in splashes:
+            self.splashes.append(splash)
+
+    def AddButtons(self, *buttons):
+        for button in buttons:
+            self.buttons.append(button)
+
+    def DrawSplashes(self):
+        for splash in self.splashes:
+            self.game.screen.blit(splash.image, splash.rect)
+
+    def DrawButtons(self):
+        for button in self.buttons:
+            self.game.screen.blit(button.image, button.rect)
 
     # Change the FPS of the state
     def SetFPS(self, new_fps):
