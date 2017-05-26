@@ -5,6 +5,7 @@ First the button must be checked to see if the mouse is hovering it, if it is,
 change the image to hovering. Then when there is a mouse click it will check
 if the button is hovered, if it then it will be held down. Once the mouse
 click is released, if it is still hovered it will do whatever Activate() is"""
+import ZedLib
 
 
 class Button(ZedLib.Surface):
