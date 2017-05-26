@@ -20,28 +20,29 @@ random.seed()
 projectiles = []
 image = pygame.Surface((10, 10))
 clock = pygame.time.Clock()
-
+direction = 'r'
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    if pygame.key.get_pressed()[pygame.K_RIGHT]:
+
+    if direction == 'r':
         spawn_x += 5
-    if pygame.key.get_pressed()[pygame.K_LEFT]:
+    elif direction == 'l':
         spawn_x -= 5
-    if pygame.key.get_pressed()[pygame.K_UP]:
-        spawn_y -= 5
-    if pygame.key.get_pressed()[pygame.K_DOWN]:
-        spawn_y += 5
-    if pygame.key.get_pressed()[pygame.K_SPACE]:
-        random_angle = random.randint(0, 359)
-        image.fill(GetRandomColor())
-        new_projectile = ZedLib.AngledProjectile(image, random_angle, 4)
-        new_projectile.pos.SetX(spawn_x)
-        new_projectile.pos.SetY(spawn_y)
-        projectiles.append(new_projectile)
+    if spawn_x > screen_width:
+        direction = 'l'
+    elif spawn_x < 0:
+        direction = 'r'
+
+    random_angle = random.randint(0, 359)
+    image.fill(GetRandomColor())
+    new_projectile = ZedLib.AngledProjectile(image, random_angle, 4)
+    new_projectile.pos.SetX(spawn_x)
+    new_projectile.pos.SetY(spawn_y)
+    projectiles.append(new_projectile)
 
     for projectile in projectiles:
         projectile.UpdateMovement()
@@ -55,4 +56,4 @@ while running:
     for projectile in projectiles:
         screen.blit(projectile.image, projectile.rect)
     pygame.display.flip()
-    clock.tick(120)
+    clock.tick(240)
