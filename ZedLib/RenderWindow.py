@@ -4,22 +4,39 @@ import pygame
 class RenderWindow:
     def __init__(self, width, height, fullscreen=False):
         self.fullscreen = fullscreen
-        if self.fullscreen:
-            display_info = pygame.display.Info()
-            self.width = display_info.current_w
-            self.height = display_info.current_h
-            self.screen = pygame.display.set_mode((self.width,
-                                                   self.height),
-                                                  pygame.FULLSCREEN)
+        self.window_width = width
+        self.window_height = height
+        display_info = pygame.display.Info()
+        self.fullscreen_width = display_info.current_w
+        self.fullscreen_height = display_info.current_h
+        self.current_width = self.window_width
+        self.current_height = self.window_height
+        self.screen = None
+        if fullscreen:
+            self.SetFullscreenWindow()
         else:
-            self.width = width
-            self.height = height
-            self.screen = pygame.display.set_mode((self.width, self.height),
+            self.SetResizableWindow()
+
+
+    def SetFullscreenWindow(self):
+        self.fullscreen = True
+        self.current_width = self.fullscreen_width
+        self.current_height = self.fullscreen_height
+        self.screen = pygame.display.set_mode((self.current_width,
+                                               self.current_height),
+                                               pygame.FULLSCREEN)
+
+    def SetResizableWindow(self):
+        self.fullscreen = False
+        self.current_width = self.window_width
+        self.current_height = self.window_height
+        self.screen = pygame.display.set_mode((self.current_width,
+                                               self.current_height),
                                               pygame.RESIZABLE)
 
-    def Resize(self, new_width, new_height):
+    def ResizeWindow(self, new_width, new_height):
         if not self.fullscreen:
-            self.width = new_width
-            self.height = new_height
-            self.screen = pygame.display.set_mode((self.width, self.height),
-                                                  pygame.RESIZABLE)
+            self.window_height = new_width
+            self.window_height = new_height
+            self.current_width = self.window_width
+            self.current_height = self.window_height
