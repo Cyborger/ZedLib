@@ -3,10 +3,8 @@ import ZedLib
 
 
 class Projectile(ZedLib.GameSprite):
-    def __init__(self, image, x=0, y=0):
+    def __init__(self, image, x=0.0, y=0.0):
         super().__init__(image, x, y)
-        self.x_velocity = 0.0
-        self.y_velocity = 0.0
 
     def UpdateMovement(self):
         self.pos.MoveX(self.x_velocity)
@@ -15,7 +13,7 @@ class Projectile(ZedLib.GameSprite):
 
 
 class AxisProjectile(Projectile):
-    def __init__(self, image, axis, speed, x=0, y=0):
+    def __init__(self, image, axis, speed, x=0.0, y=0.0):
         super().__init__(image, x, y)
         if axis == 'x':
             self.x_velocity = speed
@@ -26,7 +24,7 @@ class AxisProjectile(Projectile):
 
 
 class AngledProjectile(Projectile):
-    def __init__(self, image, angle, velocity, x=0, y=0):
+    def __init__(self, image, angle, velocity, x=0.0, y=0.0):
         super().__init__(image, x, y)
         self.max_vel = velocity
         movement = self.GetMovementOnAngle(angle, self.max_vel)

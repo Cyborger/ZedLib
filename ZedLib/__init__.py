@@ -10,6 +10,7 @@ from .ImageLoading import *
 from .Spritesheet import *
 from .Timer import *
 from .Animation import *
+from .CollisionObject import *
 from .Position import *
 from .GameSprite import *
 from .PhysicsSprite import *
