@@ -12,10 +12,7 @@ class RenderWindow:
         self.current_width = self.window_width
         self.current_height = self.window_height
         self.screen = None
-        if fullscreen:
-            self.SetFullscreenWindow()
-        else:
-            self.SetResizableWindow()
+        self.SetWindow()
 
 
     def SetFullscreenWindow(self):
@@ -36,7 +33,12 @@ class RenderWindow:
 
     def ResizeWindow(self, new_width, new_height):
         if not self.fullscreen:
-            self.window_height = new_width
+            self.window_width = new_width
             self.window_height = new_height
-            self.current_width = self.window_width
-            self.current_height = self.window_height
+            self.SetWindow()
+
+    def SetWindow(self):
+        if self.fullscreen:
+            self.SetFullscreenWindow()
+        else:
+            self.SetResizableWindow()
