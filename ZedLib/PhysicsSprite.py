@@ -5,9 +5,9 @@ import ZedLib
 class PhysicsSprite(ZedLib.GameSprite):
     def __init__(self, image, x=0.0, y=0.0):
         super().__init__(image, x, y)
-        self.gravity = 0.1
-        self.max_y_velocity = 9.0
-        self.jump_force = -5.0
+        self.gravity = 0.0
+        self.max_y_velocity = 0.0
+        self.jump_force = 0.0
         self.can_jump = False
 
     def UpdateGravity(self):

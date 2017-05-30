@@ -9,7 +9,7 @@ class Projectile(ZedLib.GameSprite):
     def UpdateMovement(self):
         self.pos.MoveX(self.x_velocity)
         self.pos.MoveY(self.y_velocity)
-        self.UpdatePosition()
+        self.UpdateRectPosition()
 
 
 class AxisProjectile(Projectile):

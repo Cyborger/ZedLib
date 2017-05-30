@@ -23,3 +23,5 @@ class CollisionObject:
                 sprite.HitGround()
         elif sprite.move_y < 0.0:
             sprite.rect.top = self.rect.bottom
+            if isinstance(sprite, ZedLib.PhysicsSprite):
+                sprite.y_velocity = 0.0

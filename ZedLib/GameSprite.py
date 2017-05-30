@@ -57,13 +57,15 @@ class GameSprite:
         return movement
 
     def UpdateHorizontalCollisions(self, collisions):
+        self.UpdateRectPosition()
         objects_collided = pygame.sprite.spritecollide(self, collisions, False)
         for collision_object in objects_collided:
             collision_object.HorizontalCollide(self)
-            self.UpdateActualPosition()
+        self.UpdateActualPosition()
 
     def UpdateVerticalCollisions(self, collisions):
+        self.UpdateRectPosition()
         objects_collided = pygame.sprite.spritecollide(self, collisions, False)
         for collision_object in objects_collided:
             collision_object.VerticalCollide(self)
-            self.UpdateActualPosition()
+        self.UpdateActualPosition()

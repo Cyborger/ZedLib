@@ -17,6 +17,7 @@ class GameState:
         self.buttons = []
         self.splashes = []
         self.fps = 60
+        self.delta = 0
 
     # Handle different types of events
     def HandleEvents(self):
@@ -45,7 +46,7 @@ class GameState:
         pygame.display.flip()
 
     def HandleFPS(self):
-        self.game.clock.tick(self.fps)
+        self.delta = self.game.clock.tick(self.fps)
 
 # ------------------------------------------------------------------------------
     # Just deal with window closing
