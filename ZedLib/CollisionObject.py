@@ -19,7 +19,7 @@ class CollisionObject:
     def VerticalCollide(self, sprite):
         if sprite.move_y > 0.0:
             sprite.rect.bottom = self.rect.top
+            if isinstance(sprite, ZedLib.PhysicsSprite):
+                sprite.HitGround()
         elif sprite.move_y < 0.0:
             sprite.rect.top = self.rect.bottom
-        if isinstance(sprite, ZedLib.PhysicsSprite):
-            sprite.HitGround()
