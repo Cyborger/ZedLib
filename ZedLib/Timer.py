@@ -29,3 +29,7 @@ class LappingTimer:
         while self.time_passed >= self.lap_time:
             self.time_passed -= self.lap_time
             self.laps_complete += 1
+
+    def Reset(self):
+        self.laps_complete = 0
+        self.time_passed = 0
