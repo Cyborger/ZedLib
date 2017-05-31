@@ -4,8 +4,7 @@ import ZedLib
 
 class CollisionObject:
     def __init__(self, width, height, x=0, y=0):
-        self.image = pygame.Surface((width , height))
-        self.image.fill((255, 255, 255))
+        self.image = pygame.Surface((width, height))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
