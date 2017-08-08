@@ -1,6 +1,6 @@
 import pygame
 from ZedLib import RenderWindow
-import time
+from ZedLib import GameState
 
 class Game:
     """ Core class that handles the game window and all of the game states"""
@@ -14,6 +14,8 @@ class Game:
                                                        self.screen_height,
                                                        fullscreen)
         self.current_state = None
+        self.empty_game_state = GameState.GameState(self)
+        self.ChangeState(self.empty_game_state)
         self.clock = pygame.time.Clock()
         self.running = True
 
@@ -43,6 +45,3 @@ class Game:
                                                (new_width, new_height))
         self.render_screen.screen.blit(scaled_screen, (0, 0))
         pygame.display.flip()
-
-    def Wait(self, time_in_seconds):
-        time.sleep(time_in_seconds)
