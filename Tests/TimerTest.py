@@ -7,8 +7,8 @@ screen_width = 400
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-normal_timer = ZedLib.Timer(2000)
-lapping_timer = ZedLib.LappingTimer(2000)
+normal_timer = ZedLib.Timer(5000)
+lapping_timer = ZedLib.LappingTimer(5000)
 
 clock = pygame.time.Clock()
 
@@ -20,6 +20,12 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                normal_timer.Reset()
+                lapping_timer.Reset()
+            if event.key == pygame.K_DOWN:
+                lapping_timer.DecreaseLaps()
     normal_timer.Update(delta)
     lapping_timer.Update(delta)
     normal_timer_label = font.render(str(normal_timer.time_passed), 1, white)

@@ -1,52 +1,59 @@
-""" Used to make hoverable buttons that complete different tasks when clicked.
-To make a button that does something when clicked, create a new button class
-that inherits the super class but overrides the Activate() function.
-First the button must be checked to see if the mouse is hovering it, if it is,
-change the image to hovering. Then when there is a mouse click it will check
-if the button is hovered, if it then it will be held down. Once the mouse
-click is released, if it is still hovered it will do whatever Activate() is"""
 import ZedLib
 
 
 class Button(ZedLib.Surface):
-    def __init__(self, strip, function=None, x=0, y=0):
-        self.non_hovered_image = strip[0]
-        self.hovered_image = strip[1]
-        self.clicked_image = strip[2]
-        super().__init__(self.non_hovered_image, x, y)
-        self.rect = self.image.get_rect()
+    """ Changes images depending on mouse location and if clicking on it,
+        calls given function on release after pressing button """
+    def __init__(self, image_set, function=None, x=0, y=0):
+        super().__init__(image_set[0], x, y)
+        self.normal_image = image_set[0]
+        self.hovered_image = image_set[1]
+        self.clicked_image = image_set[2]
+
         self.hovered = False
         self.pressed = False
+        self.pressed_before_entering = False
+
         if function is not None:
             self.Activate = function
 
-    def Update(self, mouse_position):
+    def Update(self, mouse_position, left_click_pressed):
+        """ Update the state of the button """
         if self.rect.collidepoint(mouse_position):
-            self.Hover()
+            if not self.hovered:
+                self.__Hover()
+                if left_click_pressed:
+                    self.pressed_before_entering = True
         else:
-            self.UnHover()
+            if self.hovered:
+                self.__UnHover()
+                self.pressed_before_entering = False
 
-    def Hover(self):
-        if not self.hovered:
-            self.hovered = True
-            self.image = self.hovered_image.copy()
+        if left_click_pressed:
+            if self.hovered and not self.pressed_before_entering:
+                self.__Press()
+        else:
+            if self.pressed and self.hovered:
+                self.__Release()
+            self.pressed_before_entering = False
 
-    def UnHover(self):
-        if self.hovered:
-            self.hovered = False
-            self.image = self.non_hovered_image.copy()
+    def __Hover(self):
+        self.hovered = True
+        self.image = self.hovered_image.copy()
 
-    def CheckPress(self):
-        if self.hovered:
-            self.pressed = True
-            self.image = self.clicked_image.copy()
+    def __UnHover(self):
+        self.hovered = False
+        self.pressed = False
+        self.image = self.normal_image.copy()
 
-    def CheckRelease(self):
-        if self.pressed and self.hovered:
-            self.pressed = False
-            self.image = self.hovered_image.copy()
-            self.Activate()
+    def __Press(self):
+        self.pressed = True
+        self.image = self.clicked_image.copy()
+
+    def __Release(self):
+        self.pressed = False
+        self.image = self.hovered_image.copy()
+        self.Activate()
 
     def Activate(self):
-        print("Button is doing whatever it should be, " +
-              "but there is nothing to do")
+        print("Button is activating but doesn't half a function to run")

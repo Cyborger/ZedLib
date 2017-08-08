@@ -27,8 +27,8 @@ while running:
     delta_animation.Update(delta)
     nonlooping_delta_animation.Update(delta)
 
-    screen.blit(normal_animation.GetFrameImage(), (64, 64))
-    screen.blit(delta_animation.GetFrameImage(), (128, 128))
-    screen.blit(nonlooping_delta_animation.GetFrameImage(), (196, 196))
+    screen.blit(normal_animation.GetCurrentFrame(), (64, 64))
+    screen.blit(delta_animation.GetCurrentFrame(), (128, 128))
+    screen.blit(nonlooping_delta_animation.GetCurrentFrame(), (196, 196))
 
     pygame.display.flip()

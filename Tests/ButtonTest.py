@@ -10,13 +10,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            print("mouse clicked")
-            button.CheckPress()
-        elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
-            button.CheckRelease()
+    mouse_state = pygame.mouse.get_pressed()
+    left_mouse_button_pressed = mouse_state[0]
     mouse_pos = pygame.mouse.get_pos()
-    button.Update(mouse_pos)
+    button.Update(mouse_pos, left_mouse_button_pressed)
     screen.fill((0, 0, 0))
     screen.blit(button.image, button.rect)
     pygame.display.flip()

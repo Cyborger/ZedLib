@@ -1,56 +1,41 @@
-""" The GameState class should be inherited when you want to make different
-parts of the game (main menu, pause menu, actual gameplay, etc). The class
-itself contains a number of functions that will be called each loop
-    HandleEvents()
-    Update()
-    DrawScreen()
-    UpdateDisplay()
-    HandleFPS()
-but also contains functions that make tasks easier, like getting the mouse
-position"""
 import pygame
 
 
 class GameState:
+    """ Represents a different style or menu of a game, inherit this class
+        and change the core functions"""
     def __init__(self, game):
         self.game = game
         self.buttons = []
-        self.splashes = []
+        self.surfaces = []
         self.fps = 60
         self.delta = 0
 
-    # Handle different types of events
     def HandleEvents(self):
+        """ Calls all the event functions """
         events = pygame.event.get()
         self.HandleBasicEvents(events)
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                self.HandleKeyDownEvent(event.key)
 
-    # Update sprites
     def Update(self):
-        pass
+        """ Override to choose what to update every frame """
+        self.UpdateButtons()
+        self.UpdateSprites()
 
-    # Clear screen for next draw
-    def ClearScreen(self):
-        self.game.screen.fill((0, 0, 0))
-
-    # Draw sprites and images
     def DrawScreen(self):
-        pass
-
-    # Scale screen then update the actual display
-    def UpdateDisplay(self):
-        new_width = self.game.render_screen.current_width
-        new_height = self.game.render_screen.current_height
-        scaled_screen = pygame.transform.scale(self.game.screen,
-                                               (new_width, new_height))
-        self.game.render_screen.screen.blit(scaled_screen, (0, 0))
-        pygame.display.flip()
+        self.DrawSprites()
+        self.DrawButtons()
+        self.DrawSurfaces()
 
     def HandleFPS(self):
+        """ Set the rate at which the game loop runs """
         self.delta = self.game.clock.tick(self.fps)
 
 # ------------------------------------------------------------------------------
-    # Just deal with window closing
     def HandleBasicEvents(self, events):
+        """ Deal with basic events such as window closing and resizing """
         for event in events:
             if event.type == pygame.QUIT:
                 self.game.running = False
@@ -60,55 +45,58 @@ class GameState:
             elif event.type == pygame.VIDEORESIZE:
                 self.game.render_screen.ResizeWindow(event.w, event.h)
 
-    # Deal with mouse button presses
-    def HandleMouseEvents(self, events):
-        left_click = 1
-        middle_click = 2
-        right_click = 3
-        for event in events:
-            if (event.type == pygame.MOUSEBUTTONDOWN
-                    and event.button == left_click):
-                for button in self.buttons:
-                    button.CheckPress()
-            elif (event.type == pygame.MOUSEBUTTONUP
-                    and event.button == left_click):
-                for button in self.buttons:
-                    button.CheckRelease()
+    def HandleKeyDownEvent(self, key):
+        pass
 
-    # Get accurate mouse pos
     def GetMousePosition(self):
+        """ Get mouse position on screen """
         unscaled_mouse_pos = pygame.mouse.get_pos()
+
         screen_width = self.game.screen_width
         render_screen_width = self.game.render_screen.current_width
         x_modifier = screen_width / render_screen_width
+
         screen_height = self.game.screen_height
         render_screen_height = self.game.render_screen.current_height
         y_modifier = screen_height / render_screen_height
+
         mouse_pos = (unscaled_mouse_pos[0] * x_modifier,
                      unscaled_mouse_pos[1] * y_modifier)
         return mouse_pos
 
-    def UpdateButtons(self):
-        mouse_pos = self.GetMousePosition()
-        for button in self.buttons:
-            button.Update(mouse_pos)
+    def UpdateSprites(self):
+        pass
 
-    def AddSplashes(self, *splashes):
-        for splash in splashes:
-            self.splashes.append(splash)
+    def UpdateButtons(self):
+        """ Update the state of all buttons using the state of the mouse """
+        mouse_pos = self.GetMousePosition()
+        left_mouse_button_pressed = pygame.mouse.get_pressed()[0]
+        for button in self.buttons:
+            button.Update(mouse_pos, left_mouse_button_pressed)
+
 
     def AddButtons(self, *buttons):
+        """ Add buttons to GameState.buttons """
         for button in buttons:
             self.buttons.append(button)
 
-    def DrawSplashes(self):
-        for splash in self.splashes:
-            self.game.screen.blit(splash.image, splash.rect)
+    def AddSurfaces(self, *surfaces):
+        """ Add surfaces to GameState.surfaces """
+        for surface in surfaces:
+            self.surfaces.append(surface)
+
+    def DrawSprites(self):
+        pass
+
+    def DrawSurfaces(self):
+        for surface in self.surfaces:
+            self.game.screen.blit(surface.image, surface.rect)
 
     def DrawButtons(self):
+        """ Draw all the buttons in GameState.buttons """
         for button in self.buttons:
             self.game.screen.blit(button.image, button.rect)
 
-    # Change the FPS of the state
     def SetFPS(self, new_fps):
+        """ Change the rate at which the game loop runs """
         self.fps = new_fps

@@ -2,6 +2,7 @@ import pygame
 
 
 class RenderWindow:
+    """ The game window that can be resizable or fullscreen """
     def __init__(self, width, height, fullscreen=False):
         self.fullscreen = fullscreen
         self.window_width = width
@@ -14,16 +15,17 @@ class RenderWindow:
         self.screen = None
         self.SetWindow()
 
-
     def SetFullscreenWindow(self):
+        """ Set the window to be fullscreen """
         self.fullscreen = True
         self.current_width = self.fullscreen_width
         self.current_height = self.fullscreen_height
         self.screen = pygame.display.set_mode((self.current_width,
                                                self.current_height),
-                                               pygame.FULLSCREEN)
+                                              pygame.FULLSCREEN)
 
     def SetResizableWindow(self):
+        """ Set the window to be resizable """
         self.fullscreen = False
         self.current_width = self.window_width
         self.current_height = self.window_height
@@ -32,12 +34,14 @@ class RenderWindow:
                                               pygame.RESIZABLE)
 
     def ResizeWindow(self, new_width, new_height):
+        """ Resize a resizable window """
         if not self.fullscreen:
             self.window_width = new_width
             self.window_height = new_height
             self.SetWindow()
 
     def SetWindow(self):
+        """ Set the dimensions and type of window """
         if self.fullscreen:
             self.SetFullscreenWindow()
         else:

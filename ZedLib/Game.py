@@ -1,11 +1,9 @@
-""" The core of the game. Handles states, the screen, the game loop,
-and is also passed to certain objects that need to have access to different
-parts of the game"""
 import pygame
 from ZedLib import RenderWindow
-
+import time
 
 class Game:
+    """ Core class that handles the game window and all of the game states"""
     def __init__(self, screen_width, screen_height, fullscreen=False):
         pygame.init()
         self.screen_width = screen_width
@@ -20,13 +18,31 @@ class Game:
         self.running = True
 
     def ChangeState(self, new_state):
+        """ Update the current state that is running """
         self.current_state = new_state
 
     def Loop(self):
+        """ Calls needed functions every frame """
         while self.running:
             self.current_state.HandleEvents()
             self.current_state.Update()
-            self.current_state.ClearScreen()
+            self.ClearScreen()
             self.current_state.DrawScreen()
-            self.current_state.UpdateDisplay()
+            self.UpdateDisplay()
             self.current_state.HandleFPS()
+
+    def ClearScreen(self):
+        """ Clear the screen with black """
+        self.screen.fill((0, 0, 0))
+
+    def UpdateDisplay(self):
+        """ Scale the screen then blit it to the display """
+        new_width = self.render_screen.current_width
+        new_height = self.render_screen.current_height
+        scaled_screen = pygame.transform.scale(self.screen,
+                                               (new_width, new_height))
+        self.render_screen.screen.blit(scaled_screen, (0, 0))
+        pygame.display.flip()
+
+    def Wait(self, time_in_seconds):
+        time.sleep(time_in_seconds)

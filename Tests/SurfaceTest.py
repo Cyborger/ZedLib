@@ -5,10 +5,10 @@ screen_width = 500
 screen_height = 500
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-test_surface1 = ZedLib.Surface("test_image.png", 0, 0, 1)
-test_surface2 = ZedLib.Surface("test_image.png", 100, 100, 2)
-test_surface3 = ZedLib.Surface("test_image.png", 200, 200, 3)
-test_surface4 = ZedLib.Surface("test_image.png", 300, 300, 4)
+test_surface1 = ZedLib.Surface(ZedLib.LoadImage("test_image.png", scale=1), 0, 0)
+test_surface2 = ZedLib.Surface(ZedLib.LoadImage("test_image.png", scale=2), 100, 100)
+test_surface3 = ZedLib.Surface(ZedLib.LoadImage("test_image.png", scale=3), 200, 200)
+test_surface4 = ZedLib.Surface(ZedLib.LoadImage("test_image.png", scale=4), 300, 300)
 test_surface_list = [test_surface1, test_surface2, test_surface3,
                      test_surface4]
 running = True
