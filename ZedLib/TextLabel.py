@@ -1,2 +1,0 @@
-class TextLabel:
-    pass

@@ -1,56 +1,57 @@
-class Timer:
-    """ A timer that can keep track of timed passed """
-    def __init__(self, delay):
-        self.delay = delay
-        self.complete = False
+class Stopwatch:
+    """ Keeps track of time passed """
+    def __init__(self):
         self.time_passed = 0
 
-    def Update(self, delta):
-        """ Update time passed """
+    def update(self, delta):
+        """ Update time that has passed """
         self.time_passed += delta
-        if self.time_passed >= self.delay:
-            self.time_passed = self.delay
+
+    def reset(self):
+        """ Reset stopwatch to the beginning """
+        self.time_passed = 0
+
+class Timer:
+    """ Counts to given amount of time and stops counting when complete"""
+    def __init__(self, ms_time):
+        self.time = ms_time
+        self.time_passed = 0
+        self.complete = False
+
+    def update(self, delta):
+        """ Update time that has passed """
+        self.time_passed += delta
+        if self.time_passed >= self.time:
+            self.time_passed = self.time
             self.complete = True
 
-    def Reset(self):
-        """ Reset the timer to the beginning """
+    def reset(self):
+        """ Reset timer to the beginning """
         self.time_passed = 0
         self.complete = False
 
 
 class LappingTimer:
-    """ A timer that keeps track of time and continues on after it reaches the
-        end, but keeps track of how many times it has lapped """
-    def __init__(self, lap_time):
-        self.lap_time = lap_time
+    """ A timer that loops and keeps track of loops complete """
+    def __init__(self, ms_time):
+        self.lap_time = ms_time
         self.time_passed = 0
         self.laps_complete = 0
 
-    def Update(self, delta):
-        """ Update time passed """
+    def update(self, delta):
+        """ Update time that has passed """
         self.time_passed += delta
         while self.time_passed >= self.lap_time:
             self.time_passed -= self.lap_time
             self.laps_complete += 1
 
-    def Reset(self):
-        """ Reset the timer to the beginning """
-        self.laps_complete = 0
+    def reset(self):
+        """ Reset timer to the beginning """
         self.time_passed = 0
+        self.laps_complete = 0
 
-    def DecreaseLaps(self, amount=1):
-        """ Decrease the counter for times the timer has completed """
-        self.laps_complete -= 1
+    def decrease_laps(self, amount=1):
+        """ Decrease the lap counter """
+        self.laps_complete -= amount
         if self.laps_complete < 0:
             self.laps_complete = 0
-
-
-class CountingTimer:
-    def __init__(self):
-        self.time_passed = 0
-
-    def Update(self, delta):
-        self.time_passed += delta
-
-    def Reset(self):
-        self.time_passed = 0

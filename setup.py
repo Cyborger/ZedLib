@@ -1,8 +1,8 @@
 from setuptools import setup
 
-setup(name='ZedLib',
+setup(name='zedlib',
       version='0.2',
       description='A library built on top of pygame',
       author='Joe Zlonicky',
-      packages=['ZedLib'],
+      packages=['zedlib'],
       zip_safe=False)

@@ -1,70 +1,54 @@
-import ZedLib
-
+import zedlib
 
 class Animation:
-    """ A series of images that can be traversed through """
-    def __init__(self, frame_set, looping=True):
-        self.frames = frame_set
+    """ A series of images that can be traversed """
+
+    def __init__(self, image_set, ms_delta=0, looping=True):
+        self.frames = image_set
         self.current_frame_n = 0
         self.looping = looping
+        self.time_dependent = ms_delta > 0
+        self.timer = zedlib.LappingTimer(ms_delta)
 
-    def IsLastFrame(self):
-        """ Returns true if the animation is on the last frame """
-        if self.current_frame_n == len(self.frames) - 1:
-            return True
-        else:
-            return False
-
-    def IsFirstFrame(self):
+    def on_first_frame(self):
         """ Returns true if the animation is on the first frame """
-        if self.current_frame_n == 0:
-            return True
+        return self.current_frame_n == 0
+
+    def on_last_frame(self):
+        """ Returns true if the animation is on the last frame """
+        return self.current_frame_n == len(self.frames) - 1
+
+    def frames_from_end(self):
+        """ Get number of frames until end of animation """
+        return len(self.frames) - (self.current_frame_n + 1)
+
+    def get_current_frame(self):
+        """ Get the current image of the animation """
+        return self.get_frame(self.current_frame_n)
+
+    def get_frame(self, frame_number):
+        """ Get a frame from its index """
+        return self.frames[frame_number]
+
+    def restart(self):
+        """ Go back to the first frame """
+        self.current_frame_n = 0
+
+    def update(self, delta=0):
+        """ Go to the next image """
+        if self.time_dependent:
+            self.timer.update(delta)
+            for _ in range(self.timer.laps_complete):
+                self.increment_frame()
+                self.timer.decrease_laps()
         else:
-            return False
+            self.current_frame_n += 1
+            if self.current_frame_n > len(self.frames) - 1:
+                self.reached_end()
 
-    def FramesFromEnd(self):
-        """ Number of frames until end of animation """
-        frames_from_end = len(self.frames) - (current_frame_n + 1)
-        return frames_from_end
-
-    def GetCurrentFrame(self):
-        """ Get the current image """
-        return self.frames[self.current_frame_n]
-
-    def IncrementFrame(self):
-        """ Go to next image in set """
-        self.current_frame_n += 1
-        if self.current_frame_n > len(self.frames) - 1:
-            self.__ReachedEnd()
-
-    def DecreaseFrame(self):
-        """ Go to previous image in set """
-        self.current_frame_n -= 1
-        if self.current_frame_n < 0:
-            self.__ReachedStart()
-
-    def __ReachedStart(self):
+    def reached_end(self):
+        """ Called when animation reaches end of frames """
         if self.looping:
-            self.current_frame_n = len(self.frames) - 1
-        else:
-            self.current_frame_n = 0
-
-    def __ReachedEnd(self):
-        if self.looping:
             self.current_frame_n = 0
         else:
             self.current_frame_n = len(self.frames) - 1
-
-
-class DeltaAnimation(Animation):
-    """ An animation that goes to the next frame from time passed """
-    def __init__(self, frames, ms_delay, looping=True):
-        super().__init__(frames, looping)
-        self.timer = ZedLib.LappingTimer(ms_delay)
-
-    def Update(self, delta):
-        """ Add time passed and go to the next image if needed """
-        self.timer.Update(delta)
-        for i in range(self.timer.laps_complete):
-            self.IncrementFrame()
-            self.timer.laps_complete -= 1
