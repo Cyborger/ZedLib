@@ -1,16 +1,16 @@
+import zedlib
 import pygame
 
 
-class TextLabel:
+class TextLabel(zedlib.Surface):
     def __init__(self, text, rect, font, color=(255, 255, 255), aa=False):
+        super().__init__(pygame.Surface((rect.width, rect.height)),
+                         pygame.SRCALPHA, 32)
         self.rect = rect
+        self.image.convert_alpha()
         self.font = font
         self.color = color
         self.aa = aa
-
-        self.image = pygame.Surface((rect.width, rect.height), pygame.SRCALPHA,
-                                    32)
-        self.image.convert_alpha()
         self.draw_text(text)
 
     def draw_text(self, text):
