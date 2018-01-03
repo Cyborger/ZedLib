@@ -8,18 +8,19 @@ class GameSprite:
         self.image = image
         self.rect = self.image.get_rect()
         self.position = zedlib.Position(x, y)
-        self.update_rect_x()
-        self.update_rect_y()
         self.x_velocity = 0.0
         self.y_velocity = 0.0
         self.move_x = 0.0
         self.move_y = 0.0
 
-    def draw(self, screen, camera = None):
+        self.update_rect_x()
+        self.update_rect_y()
+
+    def draw(self, surface, camera = None):
+        """ Draw image on a given surface, a zedlib.Camera can also be used """
         rect = self.rect
-        if camera:
-            rect = camera.apply(rect)
-        screen.blit(self.image, rect)
+        if camera: rect = camera.apply(rect)
+        surface.blit(self.image, rect)
 
     def update_rect_x(self):
         """ Update x position of the rect, from self.position """
@@ -30,7 +31,8 @@ class GameSprite:
         self.rect.y = self.position.get_position()[1]
 
     def update_movement(self, collisions=[]):
-        if (self.move_x != 0.0) and (self.move_y != 0.0):
+        """ Update the position of rect and handle collisions """
+        if self.move_x and self.move_y:
             movement = self.get_diagonal_movement(math.fabs(self.move_x))
             self.move_x = math.copysign(movement[0], self.move_x)
             self.move_y = math.copysign(movement[1], self.move_y)
@@ -46,6 +48,7 @@ class GameSprite:
         self.move_y = 0.0
 
     def handle_horizonal_collisions(self, collisions):
+        """ Stop rect from moving through collisions horizontally """
         self.update_rect_x()
         collision_objects = pygame.sprite.spritecollide(self, collisions, False)
         for collision_obj in collision_objects:
@@ -53,6 +56,7 @@ class GameSprite:
             self.position.set_x(self.rect.x)
 
     def handle_vertical_collisions(self, collisions):
+        """ Stop rect from moving through collisions vertically """
         self.update_rect_y()
         collision_objects = pygame.sprite.spritecollide(self, collisions, False)
         for collision_obj in collision_objects:
