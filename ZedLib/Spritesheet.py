@@ -33,3 +33,6 @@ class Spritesheet:
             image = self.get_image(x, y)
             images.append(image)
         return images
+
+    def get_first_image(self):
+        return self.get_image(0, 0)
