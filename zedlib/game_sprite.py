@@ -54,6 +54,7 @@ class GameSprite:
         for collision_obj in collision_objects:
             collision_obj.horizontal_collide(self)
             self.position.set_x(self.rect.x)
+        if collision_objects: self.collision_occured()
 
     def handle_vertical_collisions(self, collisions):
         """ Stop rect from moving through collisions vertically """
@@ -62,6 +63,11 @@ class GameSprite:
         for collision_obj in collision_objects:
             collision_obj.vertical_collide(self)
             self.position.set_y(self.rect.y)
+        if collision_objects: self.collision_occured()
+
+    def collision_occured(self):
+        """ Called when sprite has collided with an object """
+        pass
 
     def get_diagonal_movement(self, speed):
         """ Reduce diagonal movement to be equal to normal movement speed """
