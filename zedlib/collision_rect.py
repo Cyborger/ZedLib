@@ -1,7 +1,7 @@
 import pygame
 
 
-class CollisionObject:
+class CollisionRect:
     def __init__(self, width, height, x=0, y=0):
         self.rect = pygame.Rect(x, y, width, height)
 
