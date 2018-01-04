@@ -35,4 +35,5 @@ class Spritesheet:
         return images
 
     def get_first_image(self):
+        """ Get the top left image of the spritesheet """
         return self.get_image(0, 0)
