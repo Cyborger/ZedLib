@@ -45,10 +45,10 @@ class Camera:
 
     def handle_undersized_location(self):
         """ Centers the location if map size is smaller than screen """
-        if self.rect.width < self.render_window.current_width:
-            x = (self.render_window.current_width - self.rect.width) / 2
+        if self.rect.width < self.screen_width:
+            x = (self.screen_width - self.rect.width) / 2
             self.rect.x = x
 
-        if self.rect.height < self.render_window.current_height:
-            y = (self.render_window.current_height - self.rect.height) / 2
+        if self.rect.height < self.screen_height:
+            y = (self.screen_height - self.rect.height) / 2
             self.rect.y = y
