@@ -1,8 +1,9 @@
+from zedlib.surface import Surface
 import zedlib
 import pygame
 
 
-class Button(zedlib.Surface):
+class Button(Surface):
     """ Updates based on mouse position and state of mouse buttons,
     calls given function on release """
 
@@ -10,9 +11,9 @@ class Button(zedlib.Surface):
         spritesheet = zedlib.Spritesheet(image_path, n_of_frames, 1, scale)
         super().__init__(spritesheet.get_first_image())
 
-        self.normal_image = self.spritesheet.get_image(0, 0)
-        self.hovered_image = self.spritesheet.get_image(1, 0)
-        self.clicked_image = self.spritesheet.get_image(2, 0)
+        self.normal_image = spritesheet.get_image(0, 0)
+        self.hovered_image = spritesheet.get_image(1, 0)
+        self.clicked_image = spritesheet.get_image(2, 0)
 
         self.hovered = False
         self.pressed = False
