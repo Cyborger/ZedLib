@@ -18,9 +18,10 @@ class GameSprite:
 
     def draw(self, surface, camera = None):
         """ Draw image on a given surface, a zedlib.Camera can also be used """
-        rect = self.rect
-        if camera: rect = camera.apply(rect)
-        surface.blit(self.image, rect)
+        if camera:
+            surface.blit(self.image, camera.apply(self.rect))
+        else:
+            surface.blit(self.image, rect)
 
     def update_rect_x(self):
         """ Update x position of the rect, from self.position """
