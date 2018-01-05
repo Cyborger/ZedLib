@@ -10,9 +10,12 @@ class Surface:
         self.rect.x = x
         self.rect.y = y
 
-    def draw(self, surface):
+    def draw(self, surface, camera=None):
         """ Draw image on another surface """
-        surface.blit(self.image, self.rect)
+        if camera:
+            surface.blit(self.image, camera.apply(self.rect))
+        else:
+            surface.blit(self.image, self.rect)
 
     def center_horizontal(self, rect):
         """ Center rect horizontally by the center of a given rect """
