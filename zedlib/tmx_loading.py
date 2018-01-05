@@ -20,7 +20,8 @@ class TMXData:
 
     def get_layer(self, layer_name):
         """ Get a layer by its name """
-        return self.data.get_layer_by_name(layer_name)
+        for layer in self.data.layers:
+            if layer.name == layer_name: return layer
 
     def load(self):
         """ Load all the tmx data """
