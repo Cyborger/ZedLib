@@ -18,6 +18,13 @@ class Spritesheet:
                                        self.tile_height))
         return image
 
+    def get_all_images(self):
+        """ Get all images, starting at top left and moving left to right """
+        images = []
+        for y in range(self.tiles_high):
+            images.extend(self.get_horizontal_strip(y))
+        return images
+
     def get_horizontal_strip(self, y):
         """ Get a list of images from a horizontal strip """
         images = []
