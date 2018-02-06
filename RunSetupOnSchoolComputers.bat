@@ -1,3 +1,2 @@
-pushd L:\Documents\GitHub\ZedLib
-C:\Python34\python setup.py install
+L:\Documents\Python3.6.4\python setup.py install
 pause
