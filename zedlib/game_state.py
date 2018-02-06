@@ -11,6 +11,9 @@ class GameState:
         for event in events:
             if event.type == pygame.QUIT:
                 self.game.running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F4:
+                    self.game.running = False
 
     def handle_input(self):
         pass

@@ -13,8 +13,9 @@ class Game:
         self.screen = pygame.Surface((self.screen_width, self.screen_height))
 
         self.render_window = render_window.\
-                RenderWindow(self.screen_width, self.screen_height, fullscreen)
-                
+                RenderWindow(self.screen_width, self.screen_height,
+                             fullscreen=fullscreen)
+
         self.current_state = game_state.GameState(self)
         self.clock = pygame.time.Clock()
         self.running = True
